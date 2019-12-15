@@ -1,0 +1,278 @@
+clc;clear all;close all;
+iterations=1000000;%take 20 min
+y = [607, 583, 521, 494, 369, 782, 570, 678, 467, 620, 425, 395, 346, 361, 310, 300, 382, 294, 315, 323, 421, 339, 398, 328, 335, 291, 329, 310, 294, 321, 286, 349, 279, 268, 293, 310, 259, 241, 243, 272, 247, 275, 220, 245, 268, 357, 273, 301, 322, 276, 401, 368, 149, 507, 411, 362, 358, 355, 362, 324, 332, 268, 259, 274, 248, 254, 242, 286, 276, 237, 259, 251, 239, 247, 260, 237, 206, 242, 361, 267, 245, 331, 357, 284, 263, 244, 317, 225, 254, 253, 251, 314, 239, 248, 250, 200, 256, 233, 427, 391, 331, 395, 337, 392, 352, 381, 330, 368, 381, 316, 335, 316, 302, 375, 361, 330, 351, 186, 221, 278, 244, 218, 126, 269, 238, 194, 384, 154, 555, 387, 317, 365, 357, 390, 320, 316, 297, 354, 266, 279, 327, 285, 258, 267, 226, 237, 264, 510, 490, 458, 425, 522, 927, 555, 550, 516, 548, 560, 545, 633, 496, 498, 223, 222, 309, 244, 207, 258, 255, 281, 258, 226, 257, 263, 266, 238, 249, 340, 247, 216, 241, 239, 226, 273, 235, 251, 290, 473, 416, 451, 475, 406, 349, 401, 334, 446, 401, 252, 266, 210, 228, 250, 265, 236, 289, 244, 327, 274, 223, 327, 307, 338, 345, 381, 369, 445, 296, 303, 326, 321, 309, 307, 319, 288, 299, 284, 278, 310, 282, 275, 372, 295, 306, 303, 285, 316, 294, 284, 324, 264, 278, 369, 254, 306, 237, 439, 287, 285, 261, 299, 311, 265, 292, 282, 271, 268, 270, 259, 269, 249, 261, 425, 291, 291, 441, 222, 347, 244, 232, 272, 264, 190, 219, 317, 232, 256, 185, 210, 213, 202, 226, 250, 238, 252, 233, 221, 220, 287, 267, 264, 273, 304, 294, 236, 200, 219, 276, 287, 365, 438, 420, 396, 359, 405, 397, 383, 360, 387, 429, 358, 459, 371, 368, 452, 358, 371];
+ind = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5,5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14,14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18,19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23,23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27,28, 28, 28, 28, 28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30,31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 33, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34,34, 34, 34, 34];
+y_cell = {[607, 583, 521, 494, 369], [782, 570, 678, 467, 620], [425, 395, 346, 361, 310, 300, 382, 294, 315], [323], [421, 339, 398, 328, 335, 291, 329, 310, 294, 321, 286, 349, 279, 268, 293, 310], [259, 241, 243, 272, 247, 275, 220, 245, 268], [357, 273, 301, 322, 276], [401, 368, 149, 507, 411], [362, 358, 355, 362, 324], [332, 268, 259, 274, 248, 254, 242, 286, 276, 237, 259, 251, 239, 247, 260, 237, 206, 242], [361, 267, 245, 331, 357, 284, 263, 244, 317, 225, 254, 253, 251, 314, 239, 248, 250, 200, 256, 233], [427, 391, 331, 395, 337, 392, 352, 381, 330, 368, 381, 316, 335, 316, 302, 375, 361, 330, 351, 186], [221, 278, 244, 218, 126, 269, 238, 194, 384, 154], [555, 387, 317, 365, 357, 390, 320, 316, 297, 354, 266, 279, 327], [285, 258, 267, 226, 237, 264], [510, 490, 458, 425, 522], [927, 555, 550, 516, 548], [560, 545, 633, 496, 498], [223, 222, 309, 244, 207], [258, 255, 281, 258, 226, 257, 263, 266, 238, 249, 340, 247, 216, 241, 239, 226, 273, 235, 251, 290], [473, 416, 451, 475, 406, 349, 401, 334, 446, 401], [252, 266, 210, 228, 250, 265, 236, 289, 244, 327, 274, 223], [327, 307, 338, 345, 381, 369, 445, 296, 303, 326], [321, 309, 307, 319, 288, 299, 284, 278, 310, 282, 275, 372, 295, 306, 303, 285, 316, 294, 284, 324], [264, 278, 369, 254, 306, 237, 439, 287, 285, 261, 299, 311, 265], [292, 282, 271, 268, 270], [259, 269, 249, 261, 425], [291, 291, 441, 222, 347, 244, 232, 272, 264], [190, 219, 317, 232, 256, 185, 210, 213, 202, 226], [250, 238, 252, 233, 221, 220], [287, 267, 264, 273, 304], [294, 236, 200, 219, 276], [287], [365, 438, 420, 396, 359, 405, 397, 383, 360, 387, 429, 358, 459, 371, 368, 452, 358, 371]};
+
+child= [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0];
+
+I = length(y);
+J = 34;
+logy = log(y);
+mean_logy = mean(logy);
+std_logy = std(logy);
+log_post=@(beta) logprior_theta(beta(1:34),beta(36),beta(37))+loglikelihood(y_cell,logy,beta(1:34),beta(35))+logprior_mu(beta(36))+logprior_tau(beta(37))+logprior_sigma(beta(35));
+initial=ones(1,37);
+posterior=slicesample(initial,iterations,'logpdf',log_post,'width',1);
+%%%assignment 6
+log_post2=@(beta) logprior_theta2(beta(1:34),beta(36),beta(37),beta(38),child)+loglikelihood(y_cell,logy,beta(1:34),beta(35))+logprior_mu(beta(36))+logprior_tau(beta(37))+logprior_sigma(beta(35))+logprior_phi(beta(38));
+
+initial2=ones(1,38);
+% initial2(38)=0.1;
+posterior2=slicesample(initial2,iterations,'logpdf',log_post2,'width',1);
+            %%%%%% Task 1%%%%%%%
+            
+phi=posterior2(:,38);
+phi_1=std_logy*phi;
+fprintf('-.-.-.-.-.-.-.-.-.- Task 1 .-.-.-.-.-.-.-.-.-.-.-\n');
+figure(1)
+subplot(1,2,1);
+h=histogram(phi,200,'normalization','pdf');
+title("Phi")
+xlabel("Normalized scale(zlogy)");grid on;
+mean1=mean(phi);
+median1=median(phi);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For Phi on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+subplot(1,2,2);
+h=histogram(phi_1,200,'normalization','pdf');
+title("Phi")
+xlabel("Original scale(logy)");grid on;
+mean1=mean(phi_1);
+median1=median(phi_1);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For Phi on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+       %%%%%%%%%%%%%%%%%Task 2%%%%%%%%%%%%%%
+fprintf('-.-.-.-.-.-.-.-.-.- Task 2 .-.-.-.-.-.-.-.-.-.-.-\n');
+%
+tau_6=posterior2(:,37);
+tau_6_1=std_logy*tau_6;
+tau_5=posterior(:,37);
+tau_5_1=std_logy*tau_5;
+
+figure(2)
+subplot(1,2,1);
+h=histogram(tau_6,200,'normalization','pdf');
+title("tau Assinment 6")
+xlabel("Normalized scale(zlogy)");grid on;
+mean1=mean(tau_6);
+median1=median(tau_6);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For tau assinment 6 on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+subplot(1,2,2);
+h=histogram(tau_6_1,200,'normalization','pdf');
+title("tau Assinment 6")
+xlabel("Original scale(logy)");grid on;
+mean1=mean(tau_6_1);
+median1=median(tau_6_1);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For tau assinment 6 on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+
+figure(3)
+subplot(1,2,1);
+h=histogram(tau_5,200,'normalization','pdf');
+title("tau Assinment 5")
+xlabel("Normalized scale(zlogy)");grid on;
+mean1=mean(tau_5);
+median1=median(tau_5);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For tau assinment 5 on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+subplot(1,2,2);
+h=histogram(tau_5_1,200,'normalization','pdf');
+title("tau Assinment 5")
+xlabel("Original scale(logy)");grid on;
+mean1=mean(tau_5_1);
+median1=median(tau_5_1);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+CI=HDI(h,0.95);
+fprintf('For tau assinment 5 on normalized scale(zlogy): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+    %%%%%%%%%%%%%%%%%%%%%%%Task 3%%%%%%%%%%%%%%%%%%%%
+fprintf('-.-.-.-.-.-.-.-.-.- Task 3 .-.-.-.-.-.-.-.-.-.-.-\n');
+mu_6= std_logy*posterior2(:,36)+mean_logy;
+mu_5= std_logy*posterior(:,36)+mean_logy;
+prior_child=mean(mu_6+phi_1)+mean(tau_6_1).*randn(iterations,1);
+prior_adult=mean(mu_6)+mean(tau_6_1).*randn(iterations,1);
+prior_assignment5=mean(mu_5)+mean(tau_5_1).*randn(iterations,1);
+figure(4)
+h1=histogram(prior_child,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','r');
+title("prior distributions")
+hold on;
+mean1=mean(prior_child);
+median1=median(prior_child);
+[a b]=max(h1.Values);
+mode1=b*h1.BinWidth+h1.BinLimits(1);
+CI=HDI(h1,0.95);
+fprintf('For Prior Child: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+h2=histogram(prior_adult,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','b');
+hold on;
+mean1=mean(prior_adult);
+median1=median(prior_adult);
+[a b]=max(h2.Values);
+mode1=b*h2.BinWidth+h2.BinLimits(1);
+CI=HDI(h2,0.95);
+fprintf('For Prior adult: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+h3=histogram(prior_assignment5,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','k');
+grid on; 
+mean1=mean(prior_assignment5);
+median1=median(prior_assignment5);
+[a b]=max(h3.Values);
+mode1=b*h3.BinWidth+h3.BinLimits(1);
+CI=HDI(h3,0.95);
+fprintf('For Prior Assignment5: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+title("prior distributions for the expected log(reaction time)");
+legend('Kids',' Adults','Assgnment5');  
+    %%%%%%%%%%%%%%%%%%%%%%%Task 4%%%%%%%%%%%%%%%%%%%%
+fprintf('-.-.-.-.-.-.-.-.-.- Task 4 .-.-.-.-.-.-.-.-.-.-.-\n');
+figure(5);
+mu=posterior2(:,36);
+sigma=posterior2(:,35);
+zlogy_child=mu+phi*1+tau_6.*randn(iterations,1)+sigma.*randn(iterations,1);
+logy_child_unscaled=std_logy*zlogy_child+mean_logy;
+y_child=exp(logy_child_unscaled);
+zlogy_adult=mu+tau_6.*randn(iterations,1)+sigma.*randn(iterations,1);
+logy_adult_unscaled=std_logy*zlogy_adult+mean_logy;
+y_adult=exp(logy_adult_unscaled);
+h1=histogram(y_child,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','r');
+hold on;
+h2=histogram(y_adult,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','b');
+hold on;
+title("Posterior predictive distribution-mixed based on data set");
+mean1=mean(y_child);
+median1=median(y_child);
+[a b]=max(h1.Values);
+mode1=b*h1.BinWidth+h1.BinLimits(1);
+CI=HDI(h1,0.95);
+fprintf('Provide Posterior Predictive know it is a child: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+%%%%
+mean1=mean(y_adult);
+median1=median(y_adult);
+[~, b]=max(h2.Values);
+mode1=b*h2.BinWidth+h2.BinLimits(1);
+CI=HDI(h2,0.95);
+fprintf('Provide Posterior Predictive know it is a adult: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+                            %%%%%%
+child_unkown=betarnd(sum(child)+1,length(child)+sum(child)+1,[iterations 1]);
+zlogy_childunknown=mu+phi.*child_unkown+tau_6.*randn(iterations,1)+sigma.*randn(iterations,1);
+logy_childunknown_unscaled=std_logy*zlogy_childunknown+mean_logy;
+y_child_unknown=exp(logy_childunknown_unscaled);
+h3=histogram(y_child_unknown,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','k');
+mean1=mean(y_child_unknown);
+memedian1=median(y_child_unknown);
+[a b]=max(h3.Values);
+mode1=b*h3.BinWidth+h3.BinLimits(1);
+CI=HDI(h3,0.95);
+fprintf('Provide Posterior Predictive without knowledge  if it is a child(based on data set).: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+grid on; legend('Child',' Adult','Mixed'); 
+              %%50%-50% child and adult%%
+figure(6);
+child_unkown=betarnd(17+1,17+1,[iterations 1]);
+zlogy_childunknown=mu+phi.*child_unkown+tau_6.*randn(iterations,1)+sigma.*randn(iterations,1);
+logy_childunknown_unscaled=std_logy*zlogy_childunknown+mean_logy;
+y_child_unknown=exp(logy_childunknown_unscaled);
+h1=histogram(y_child,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','r');
+hold on;
+h2=histogram(y_adult,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','b');
+hold on;
+h3=histogram(y_child_unknown,200,'normalization','pdf','DisplayStyle','stairs','EdgeColor','k');
+grid on; legend('Child',' Adult','Mixed');
+mean1=mean(y_child_unknown);
+memedian1=median(y_child_unknown);
+[a b]=max(h3.Values);
+mode1=b*h3.BinWidth+h3.BinLimits(1);
+CI=HDI(h3,0.95);
+fprintf('Provide Posterior Predictive without knowledge  if it is a child(50 percent): mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('HDI=[%.3f, %.3f]\n',CI(1),CI(2));
+title("Posterior predictive distribution mixed 50%");
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function r=logprior_theta(theta,mu,tau)
+r=sum(-log(tau)-0.5 *((theta(1:34)-mu)./tau).^2);
+end
+function r=logprior_theta2(theta,mu,tau,phi,child)
+r=sum(-log(tau)-0.5 *((theta(1:34)-(mu+phi.*child))./tau).^2);
+end
+%
+function r=logprior_sigma(sigma)
+ 
+r=log(double(sigma>0));
+
+end
+%
+function r=logprior_mu(mu)
+r=log(1);
+end
+%
+function r=logprior_tau(tau)
+r=log(double(tau>0)); 
+
+end
+
+%
+%
+function r=logprior_phi(phi)
+% r=log(double(phi>0));
+r=log(1);
+
+
+end
+%
+%
+
+function r=loglikelihood(y_cell,logy,theta,sigma)
+
+r=0;
+s=size(y_cell);
+for l=1:1:s(2) 
+    ss=y_cell(l);
+    zlogy=(log(cell2mat(ss))-mean(logy)) ./ std(logy);
+    for m=1:1:length(zlogy)
+    r=r+ -log(sigma) - 0.5 *((zlogy(m) - theta(l))/sigma)^2;
+    end
+end
+end
+
+
+function H=HDI(h,coff)
+
+output=0;
+c=0;
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+while(output<=1-coff)
+     c=c+1;
+     output=output+h.Values(c)*h.BinWidth;
+    [d f]=min (abs(h.Values(b:end)-h.Values(c)));
+     m=b+f-1;
+     output=output+h.Values(m)*h.BinWidth;
+    
+   
+end
+
+hdi_min=c*h.BinWidth+h.BinLimits(1);
+hdi_max=m*h.BinWidth+h.BinLimits(1);
+H=[hdi_min hdi_max];
+
+end
